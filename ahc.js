@@ -45,13 +45,13 @@
     fn_dist = fn_dist || EuclideanSq;
     fn_centroid = fn_centroid || calcCentroid;
     
-    var dist_pairs = [], result = [], stack = pts.map(function(d,i){return i;}), centroids = pts.map(function(d,i){return {level:0,children:i};});
+    var dist_pairs = [], result = [], stack = pts.map(function(d,i){return i;}), centroids = pts.map(function(d,i){return {level:0,children:i,family:[i]};});
     
     // calc dist_pairs
     pts.forEach(function(pt1,i){
       pts.forEach(
         function(pt2,j){
-          if (pt1 != pt2) dist_pairs.push({level:0,family:[i,j],children:[i,j],pair:[i,j],cost:fn_dist(pt1,pt2)});
+          if (pt1 != pt2) dist_pairs.push({level:1,family:[i,j],children:[i,j],pair:[i,j],cost:fn_dist(pt1,pt2)});
         }
       )
     })
